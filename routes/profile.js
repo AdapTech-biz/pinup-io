@@ -33,7 +33,7 @@ router.get('/:id', isLoggedIn, setCookie, updateBalance, pendingTasks, function(
             res.locals.id = req.session.user._id;
         }
 
-        if (typeof req.session.messages != 'undefined' && !req.session.messages.get("message").equals(null) ) {
+        if (typeof req.session.messages != 'undefined' ) {
 
             res.locals.message = req.session.messages.message;
             delete req.session.messages;
