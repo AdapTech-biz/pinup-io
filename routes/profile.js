@@ -36,7 +36,7 @@ router.get('/:id', isLoggedIn, setCookie, updateBalance, pendingTasks, function(
         if (typeof req.session.messages != 'undefined' && !req.session.messages.get("message").equals(null) ) {
 
             res.locals.message = req.session.messages.message;
-            req.session.messages = null;
+            delete req.session.messages;
             try{
             return res.render('profile', { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks, message: res.locals.message });
             }catch (e) {
@@ -60,8 +60,8 @@ router.get('/:id/list/partners',isLoggedIn, checkSignIn, updateBalance, pendingT
        if (typeof req.session.messages != 'undefined' && !req.session.messages.get("message").equals(null) ) {
 
             res.locals.message = req.session.messages.message;
-            req.session.messages = null;
-            return res.render('displayPartnerShips', { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks, message: res.locals.message });
+           delete req.session.messages;
+           return res.render('displayPartnerShips', { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks, message: res.locals.message });
         }
         try{
        res.render('displayPartnerShips', { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks });

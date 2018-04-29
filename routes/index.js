@@ -9,7 +9,7 @@ router.get("/",  function(req, res) {
     }
     if(typeof req.session.messages !== 'undefined'){
         res.locals.message = req.session.messages.message;
-        req.session.messages = null;
+        delete req.session.messages;
         try{
         return res.render('home', {message: res.locals.message});
         }catch (e) {
