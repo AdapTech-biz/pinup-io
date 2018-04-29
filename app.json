@@ -1,0 +1,28 @@
+{
+  "name": "pinup-io",
+  "scripts": {
+  },
+  "env": {
+    "PORT": {
+      "required": true
+    },
+    "DB_CONNECT": "mongodb+srv://group:cmsc495_Group2@cmcs495-a596k.mongodb.net/",
+    "DB_NAME": "users",
+    "SESSION_SECRET": "Group project CMSC495!",
+    "AWS_REGION": "us-east-1",
+    "EMAIL_CLIENT": "customer-support@pinup.awsapps.com"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
