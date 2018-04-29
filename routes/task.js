@@ -3,7 +3,6 @@ var router = express.Router();
 var AWS = require('aws-sdk');
 var Profile = require("../models/profile");
 var Task = require("../models/task");
-var isLoggedIn = require('../middleware/loggedIn');
 var checkSignIn = require('../middleware/signedIn');
 var updateBalance = require('../middleware/updateBalance');
 var setCookie = require("../middleware/setCookie");
@@ -116,12 +115,13 @@ router.post('/:id', checkSignIn, updateBalance, function(req, res) {
                     function(data) {
                         console.log(data.MessageId);
                         console.log('Email sent: ' + data.response);
-                        req.session.messages = {message: "Email sent to" + taskAcceptor.firstName};
-                        res.redirect("/profile/" + req.session.user._id);
+
                     }).catch(
                     function(err) {
                         console.error(err, err.stack);
                     });
+                req.session.messages = {message: "Email sent to" + taskAcceptor.firstName};
+                res.redirect("/profile/" + req.session.user._id);
             }
             else {
                 res.redirect("/profile/" + req.session.user._id);
@@ -356,7 +356,7 @@ router.put("/complete/:userID/:taskID", checkSignIn, setCookie, pendingTasks, fu
                 function(data) {
                     console.log(data.MessageId);
                     console.log('Email sent: ' + data.response);
-                    res.redirect("/profile/" + req.session.user._id);
+
                 }).catch(
                 function(err) {
                     console.error(err, err.stack);
@@ -367,7 +367,8 @@ router.put("/complete/:userID/:taskID", checkSignIn, setCookie, pendingTasks, fu
             if (err)
                 console.log(err);
         });
-        console.log(taskFound);
+        res.redirect("/profile/" + req.session.user._id);
+        // console.log(taskFound);
     });
 
 });
