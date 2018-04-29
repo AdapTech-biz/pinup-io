@@ -181,10 +181,8 @@ router.post("/review/:id/:key", checkSignIn, setCookie, function(req, res) {
                     if (err)
                         console.log(err);
                     taskAcceptor.acceptedTasks.push(task);
-                    taskAcceptor.save();
                     taskAcceptor.pendingTasks.remove(task);
                     taskAcceptor.save();
-                    req.session.user = taskAcceptor;
                 });
                 try{
                 res.redirect("/profile/" + req.session.user._id);
