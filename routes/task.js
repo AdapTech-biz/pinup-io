@@ -121,10 +121,10 @@ router.post('/:id', checkSignIn, updateBalance, function(req, res) {
                         console.error(err, err.stack);
                     });
                 req.session.messages = {message: "Email sent to" + taskAcceptor.firstName};
-                res.redirect("/profile/" + req.session.user._id);
+               return res.redirect("/profile/" + req.session.user._id);
             }
             else {
-                res.redirect("/profile/" + req.session.user._id);
+               return res.redirect("/profile/" + req.session.user._id);
             }
 
 
@@ -191,7 +191,7 @@ router.post("/review/:id/:key", checkSignIn, setCookie, function(req, res) {
                 }
             }
             else {
-                res.render('error');
+               return res.render('error');
             }
         }
         else {
