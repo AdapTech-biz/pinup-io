@@ -203,10 +203,10 @@ router.post('/:id/recover', function(req, res) {
                         Data: 'PinUp Account Reset'
                     }
                 },
-                Source: process.env.EMAIL_CLIENT,
+                Source: ""+process.env.EMAIL_CLIENT,
                 /* required */
                 ReplyToAddresses: [
-                    process.env.EMAIL_CLIENT
+                    ""+process.env.EMAIL_CLIENT
                     /* more items */
                 ],
             };
@@ -278,10 +278,10 @@ router.post('/:id/helpUnlock', function(req, res) {
                         Data: 'PinUp Account Unlock'
                     }
                 },
-                Source: process.env.EMAIL_CLIENT,
+                Source: ""+process.env.EMAIL_CLIENT,
                 /* required */
                 ReplyToAddresses: [
-                    process.env.EMAIL_CLIENT
+                    ""+process.env.EMAIL_CLIENT
                     /* more items */
                 ],
             };
@@ -437,10 +437,10 @@ router.post('/signup', function(req, res) {
                                 Data: 'PinUp Account Activation'
                             }
                         },
-                        Source: process.env.EMAIL_CLIENT,
+                        Source: ""+process.env.EMAIL_CLIENT,
                         /* required */
                         ReplyToAddresses: [
-                            process.env.EMAIL_CLIENT
+                            ""+process.env.EMAIL_CLIENT
                             /* more items */
                         ],
                     };
@@ -538,10 +538,10 @@ router.post("/invite", function(req, res) {
                     Data: 'PinUp Account Invite'
                 }
             },
-            Source: process.env.EMAIL_CLIENT,
+            Source: ""+process.env.EMAIL_CLIENT,
             /* required */
             ReplyToAddresses: [
-                process.env.EMAIL_CLIENT
+                ""+process.env.EMAIL_CLIENT
                 /* more items */
             ],
         };
@@ -669,10 +669,10 @@ router.post("/register/:sponsorID", function(req, res) {
                                 Data: 'PinUp Account Activation'
                             }
                         },
-                        Source: process.env.EMAIL_CLIENT,
+                        Source: ""+process.env.EMAIL_CLIENT,
                         /* required */
                         ReplyToAddresses: [
-                            process.env.EMAIL_CLIENT
+                            ""+process.env.EMAIL_CLIENT
                             /* more items */
                         ],
                     };

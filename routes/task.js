@@ -96,10 +96,10 @@ router.post('/:id', checkSignIn, updateBalance, function(req, res) {
                             Data: 'PinUp Task Review'
                         }
                     },
-                    Source: process.env.EMAIL_CLIENT,
+                    Source: ""+process.env.EMAIL_CLIENT,
                     /* required */
                     ReplyToAddresses: [
-                        process.env.EMAIL_CLIENT
+                        ""+process.env.EMAIL_CLIENT
                         /* more items */
                     ],
                 };
@@ -320,10 +320,10 @@ router.put("/complete/:userID/:taskID", checkSignIn, setCookie, pendingTasks, fu
                         Data: 'PinUp Task Payout Approval'
                     }
                 },
-                Source: process.env.EMAIL_CLIENT,
+                Source: ""+process.env.EMAIL_CLIENT,
                 /* required */
                 ReplyToAddresses: [
-                    process.env.EMAIL_CLIENT
+                    ""+process.env.EMAIL_CLIENT
                     /* more items */
                 ],
             };
