@@ -24,7 +24,11 @@ router.get('/:id', checkSignIn, setCookie, updateBalance, pendingTasks, function
         if (err) {
             return res.redirect('/');
         }
-        res.render("newTask", { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks });
+        try{
+            res.render("newTask", { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks });
+        }catch (e) {
+            return res.redirect('/');
+        }
     });
 
 });
@@ -135,9 +139,11 @@ router.get("/review/:id/:key", checkSignIn, updateBalance, pendingTasks, functio
         if (err)
             console.log(err);
 
-
+    try{
         res.render("reviewTask", { reviewTask: taskFound, page: req.active, pendingTasks: res.locals.pendingTasks });
-
+    }catch (e) {
+        return res.redirect('/');
+    }
     });
 });
 
@@ -180,7 +186,11 @@ router.post("/review/:id/:key", checkSignIn, setCookie, function(req, res) {
                     taskAcceptor.save();
                     req.session.user = taskAcceptor;
                 });
+                try{
                 res.redirect("/profile/" + req.session.user._id);
+                }catch (e) {
+                    return res.redirect('/');
+                }
             }
             else {
                 res.render('error');
@@ -228,8 +238,11 @@ router.get("/:userID/:taskID", checkSignIn, setCookie, updateBalance, pendingTas
         if (err)
             console.log(err);
 
-
+        try{
         res.render("viewTask", { viewTask: taskFound, page: req.active, pendingTasks: res.locals.pendingTasks });
+        }catch (e) {
+            return res.redirect('/');
+        }
 
     });
 });
@@ -266,7 +279,11 @@ router.get('/payout/pending/:userID', checkSignIn, updateBalance, pendingTasks, 
         if (err) {
             return res.redirect('/');
         }
+        try{
         res.render("displayPendingPayouts", { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks });
+        }catch (e) {
+            return res.redirect('/');
+        }
     });
 
 });
@@ -276,8 +293,11 @@ router.get("/complete/:userID/:taskID", checkSignIn, setCookie, updateBalance, p
     Task.findById(taskID).populate({ path: 'creator' }).populate({ path: 'acceptor' }).exec(function(err, taskFound) {
         if (err)
             console.log(err);
-
+        try{
         res.render("completeTask", { completedTask: taskFound, page: req.active, pendingTasks: res.locals.pendingTasks });
+        }catch (e) {
+            return res.redirect('/');
+        }
     });
 });
 

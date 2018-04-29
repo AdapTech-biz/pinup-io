@@ -37,9 +37,17 @@ router.get('/:id', isLoggedIn, setCookie, updateBalance, pendingTasks, function(
 
             res.locals.message = req.session.messages.message;
             req.session.messages = null;
+            try{
             return res.render('profile', { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks, message: res.locals.message });
+            }catch (e) {
+                return res.redirect('/');
+            }
         }
+        try{
         res.render('profile', { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks });
+        }catch (e) {
+            return res.redirect('/');
+        }
     });
 
 });
@@ -55,7 +63,11 @@ router.get('/:id/list/partners',isLoggedIn, checkSignIn, updateBalance, pendingT
             req.session.messages = null;
             return res.render('displayPartnerShips', { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks, message: res.locals.message });
         }
+        try{
        res.render('displayPartnerShips', { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks });
+        }catch (e) {
+            return res.redirect('/');
+        }
     });
     
 });
@@ -67,7 +79,11 @@ router.get('/:id/upload', checkSignIn, setCookie, validUser, updateBalance, pend
         if (err) {
             return res.redirect('/');
         }
+        try{
         res.render("upload", { userProfile: user, page: req.active, pendingTasks: res.locals.pendingTasks, currentBalance: res.locals.currentBalance });
+        }catch (e) {
+            return res.redirect('/');
+        }
     });
 });
 

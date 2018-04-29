@@ -45,8 +45,12 @@ router.use(clientErrorHandler);
 router.use(errorHandler);
 
 router.get('/login', function(req, res) {
-    var message = sanitizer(req.session.messages.message)
+    var message = sanitizer(req.session.messages.message);
+    try{
     res.render('login', { message: message, lockout: req.session.messages.lockout, page: req.active });
+    }catch (e) {
+        return res.redirect('/');
+    }
 });
 
 //below log in check is made to see if user has activated account
@@ -128,7 +132,11 @@ router.get('/:id/recover/:token', function(req, res) {
        if(err)
         console.log(err);
     if(user.recovery.recoveryToken === token && user.recovery.tokenExpire > Date.now()){
+        try{
         res.render('passwordRecovery', {recoveryID: user._id, page: req.active} );
+        }catch (e) {
+            return res.redirect('/');
+        }
     }else{
         var message = "Recovery Token Invaild -- Retry Reset";
         req.session.messages = message;
@@ -313,9 +321,13 @@ router.get('/:id/emailUnlocker', function(req, res) {
         if (err) {
             console.log(err);
         }
-        if(user.failedLogIns.isLocked)
-            res.render('unlockAccount', { user: user, page: req.active });
-        else res.redirect('/');
+        if(user.failedLogIns.isLocked){
+            try {
+                res.render('unlockAccount', {user: user, page: req.active});
+            }catch (e) {
+                res.redirect('/');
+            }
+        }else res.redirect('/');
     });
 });
 
@@ -336,7 +348,17 @@ router.post('/:id/emailUnlocker', function(req, res) {
                 user.save();
                 
             return res.redirect('/');
-        } else return res.render('unlockAccount', { user: user, page: req.active, message: "Invaild temporary password provided!" });
+        } else{
+            try {
+                return res.render('unlockAccount', {
+                    user: user,
+                    page: req.active,
+                    message: "Invaild temporary password provided!"
+                });
+            }catch (e) {
+                res.redirect('/');
+            }
+        }
     }else return res.redirect('/');
     });
 });
@@ -567,7 +589,11 @@ router.post("/invite", function(req, res) {
 router.get("/register/:sponsorID", function(req, res) {
     var sponsorID = sanitizer(req.params.sponsorID);
 
-    res.render("register", { sponsorID: sponsorID });
+    try {
+        res.render("register", {sponsorID: sponsorID});
+    }catch (e) {
+        res.redirect('/');
+    }
 
 });
 
