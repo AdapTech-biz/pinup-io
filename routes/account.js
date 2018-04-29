@@ -90,7 +90,11 @@ router.post("/login", isAccountActivated, function(req, res, next) {
                     // console.log("failed login", foundUser.failedLogIns.attempts + " " + foundUser.firstName);
 
                 }
-                else return res.redirect('/');
+
+                else {var message = 'Incorrect Log In';
+                    req.session.messages = message;
+                    return res.redirect('/');
+                }
 
             });
         }
