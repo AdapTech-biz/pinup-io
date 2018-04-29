@@ -1,0 +1,134 @@
+<% include partials/header %>
+
+  <div id="all">
+    <div class="section" id="profile-body">
+      <% if(typeof id != 'undefined' && id == completedTask.acceptor._id){ %>
+
+        <div class="container" id="task-view">
+          <div class="card text-center">
+            <div class="card-header">
+              <span class="badge badge-success"><%= completedTask.payout.amount %> XLM</span>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= completedTask.title %>
+              </h5>
+              <p class="card-text">
+                <%= completedTask.description %>
+              </p>
+
+              <form action= <%= "/task/complete/" + completedTask.acceptor._id + "/" + completedTask._id + "?_method=PUT" %> method="POST">
+                <button class="btn btn-success" id="complete-btn">Completed! <i class="far fa-check-square"></i></button>
+
+              </form>
+
+
+              <button class="btn btn-primary" data-toggle="modal" data-target="#abandonment-modal">Abandon Task <i class="far fa-frown"></i></button>
+
+
+            </div>
+            <div class="card-footer text-muted">
+              <%= completedTask.date %>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!--abandonment pop up -->
+    <div class="modal" id="abandonment-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Abandoning Task...</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to abandon the following task?</p>
+          </div>
+          <div class="modal-body">
+            <p>
+              <%= completedTask.title %>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action= <%= "/task/complete/" + completedTask.acceptor._id + "/" + completedTask._id + "?_method=DELETE" %> method="POST">
+              <button type="submit" class="btn btn-primary">YES!</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% }else if(typeof id != 'undefined' && id == completedTask.creator._id){ %>
+
+      <div class="container" id="task-view">
+        <div class="card text-center">
+          <div class="card-header">
+            <span class="badge badge-success"><%= completedTask.payout.amount %> XLM</span>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= completedTask.title %>
+            </h5>
+            <p class="card-text">
+              <%= completedTask.description %>
+            </p>
+
+            <form action= <%= "/task/complete/" + completedTask.creator._id + "/" + completedTask._id %> method="POST">
+              <button class="btn btn-success" id="complete-btn">Completed! <i class="far fa-check-square"></i></button>
+
+            </form>
+
+
+            <button class="btn btn-danger" data-toggle="modal" data-target="#decline-modal">Decline Payout <i class="far fa-frown"></i></button>
+
+
+          </div>
+          <div class="card-footer text-muted">
+            <%= completedTask.date %>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <!--decline payout pop up -->
+  <div class="modal" id="decline-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Declining Payout...</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to decline the payout for the following task?</p>
+        </div>
+        <div class="modal-body">
+          <p>
+            <%= completedTask.title %>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <form action= <%= "/profile/" + completedTask.creator._id %> method="GET">
+            <button type="submit" class="btn btn-success">YES!</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% } %>
+
+
+
+
+
+
+    <script type="text/javascript" src="/javascripts/profile-behavior.js"></script>
+
+
+    <% include partials/footer %>

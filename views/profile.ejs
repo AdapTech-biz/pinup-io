@@ -1,0 +1,177 @@
+<% include partials/header%>
+
+
+
+    <% //check to see if user has profile picture uploaded, if not use avatar placeholder
+
+    if(userProfile.picture.data == undefined){
+        var picture = "https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg";
+    }else{
+        var picture = "data:image/jpeg;base64,"+userProfile.picture.data;
+    }
+    %>
+
+        <div id="all">
+            <% if(typeof message != 'undefined' && message != null){ %>
+                <div class='container'>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <%= message %>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                    </div>
+                </div>
+
+                <% } %>
+                    <div class="section" id="profile-body">
+
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-12">
+
+                                <div class="border border-danger" id="user-picture">
+                                    <% if(id == userProfile._id ){
+                            var formName = 'uploadPic';
+                        } else {
+                            var formName = 'ViewPic';
+                        } %>
+                                        <form id=<%= formName %> action=
+                                            <%= '/profile/' +userProfile._id + '/upload' %> method="GET">
+                                                <img class="card-img-top rounded" id="profile-image" src=<%= picture %> alt="Card image cap">
+                                                <input id="submitUpload" type="submit" value="Submit" />
+                                        </form>
+
+                                        <div class="card-body">
+                                            <h3 class="card-title">
+                                                <%= userProfile.firstName + ' '+ userProfile.lastName %>
+                                            </h3>
+                                            <% if(typeof pendingPayouts != 'undefined' && pendingPayouts.length > 0){ %>
+                                                <h5 class="card-title">
+                                                    <a href=<%='/task/payout/pending/' + userProfile._id %> id='payout-signal'>Payouts Requiring Approval (<span id="payout-counter"> <%= pendingPayouts.length %> </span>)</a>
+                                                </h5>
+                                                <% } %>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <% if(userProfile.subAccounts.length > 0){ %>
+                                                <p><a href=<%='/profile/' + userProfile.subAccounts[0]._id %> > <%= userProfile.subAccounts[0].firstName + ' ' + userProfile.subAccounts[0].lastName %> </a></p>
+                                                <% } %>
+                                                    <p><a href= <%= "/profile/" + userProfile._id + "/list/partners" %> ><small>View All Partnerships</small></a></p>
+                                                    <% if(id == userProfile._id ){ %>
+                                                        <a href="#" class="card-link boarderless" id="subAccount">Add Partnership<i class="fas fa-plus-circle"></i></a>
+                                                        <% } %>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <% include partials/forms/addSubAccount %>
+
+
+
+
+                                
+                                    <div class="col-lg-9 col-sm-12">
+                                        <% if(id == userProfile._id ){ %>
+                                        <div class="row">
+                                            <h1><strong>Task Board</strong></h1>
+                                        </div>
+                                        <div class="row" >
+                                            <div class="job-pane" style="width: 100%">
+                                                <div class="row">
+
+                                                    <% userProfile.createdTasks.forEach(function(task){ %>
+
+                                                        <div class="col-lg-4 col-sm-12">
+
+                                                            <div class="card text-center task-cards">
+                                                                <div class="task-actions">
+                                                                    <form action=<%= "/task/" + userProfile._id + "/" + task._id %> method="GET" >
+                                                                        <input type="submit" class="btn btn-info" value=View>
+                                                                    </form>
+
+                                                                </div>
+                                                                <div class="card-body new-task-body">
+
+                                                                    <h5 class="card-title">
+                                                                        <%= task.title %>
+                                                                    </h5>
+                                                                    <h6 class="card-subtitle mb-2 text-muted"><span class="badge badge-success"><%= task.payout.amount %> XLM</span> </h6>
+                                                                    <h6><strong>Acceptor:</strong></h6>
+                                                                    <p class="card-text">
+                                                                        <%= task.acceptor.firstName + " " + task.acceptor.lastName %>
+                                                                    </p>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <% }); %>
+                                                            <div class="col-lg-4 col-sm-12">
+                                                                <div class="card text-center">
+                                                                    <div class="card-body new-task-body">
+                                                                        <h5 class="card-title">Submit New Task</h5>
+                                                                        <a href=<%="/task/" + id %> class="card-link new-task-plus boarderless"><i class="fas fa-thumbtack"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                        <div class="row" >
+
+                                        <h1><strong>Accepted Tasks</strong></h1>
+
+                                        <div class="job-pane" style="width: 100%">
+                                            <div class="row">
+                                                
+                                                <% if(userProfile.acceptedTasks.length == 0){ %>
+                                                <div class='col-lg col-sm-12'>
+                                                    <div class="module">
+                                                        <p class="stripe-2"><strong>None To Display</strong></p>
+                                                        </div>
+                                                </div>
+                                                
+                                                <% } %>
+
+                                                <% userProfile.acceptedTasks.forEach(function(task){ %>
+
+                                                    <div class="col-lg-4 col-sm-12">
+
+                                                        <div class="card text-center task-cards">
+                                                            <div class="task-actions">
+                                                                <form action=<%="/task/complete/" + userProfile._id + "/" + task._id %> method="GET" >
+                                                                    <input type="submit" class="btn btn-info" value=View>
+                                                                </form>
+
+                                                            </div>
+
+                                                            <div class="card-body new-task-body">
+
+                                                                <h5 class="card-title">
+                                                                    <%= task.title %>
+                                                                </h5>
+                                                                <h6 class="card-subtitle mb-2 text-muted"><span class="badge badge-success"><%= task.payout.amount %> XLM</span> </h6>
+                                                                <h6><strong>Offered By:</strong></h6>
+                                                                <p class="card-text">
+                                                                    <%= task.creator.firstName + " " + task.creator.lastName %>
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <% }); %>
+
+
+                                            </div>
+                                        </div>
+        
+                               
+                                    </div>
+                        </div>
+                        
+                    </div>
+        </div>
+
+
+        <script type="text/javascript" src="/javascripts/profile-behavior.js"></script>
+
+        <% include partials/footer %>

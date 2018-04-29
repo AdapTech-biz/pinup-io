@@ -1,0 +1,94 @@
+<% include partials/header%>
+
+
+
+    <% //check to see if user has profile picture uploaded, if not use avatar placeholder
+
+    if(userProfile.picture.data == undefined){
+        var picture = "https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg";
+    }else{
+        var picture = "data:image/jpeg;base64,"+userProfile.picture.data;
+    }
+    %>
+
+        <div id="all">
+
+            <div class="section" id="profile-body">
+
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12">
+
+                        <div class="border border-danger" id="user-picture">
+                            <% if(id == userProfile._id ){
+                                        var formName = 'uploadPic';
+                                    } else {
+                                        var formName = 'ViewPic';
+                                    } %>
+                                <form id=<%= formName %> action=
+                                    <%= '/profile/' +userProfile._id + '/upload' %> method="GET">
+                                        <img class="card-img-top rounded" id="profile-image" src=<%= picture %> alt="Card image cap">
+                                        <input id="submitUpload" type="submit" value="Submit" />
+                                </form>
+
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <%= userProfile.firstName + ' '+ userProfile.lastName %>
+                                    </h3>
+                                    <% if(typeof pendingPayouts != 'undefined' && pendingPayouts.length > 0){ %>
+                                        <h5 class="card-title">
+                                            <a href=< %='/task/payout/pending/' + userProfile._id %> id='payout-signal'>Payouts Requiring Approval (<span id="payout-counter"> <%= pendingPayouts.length %> </span>)</a>
+                                        </h5>
+                                        <% } %>
+                                </div>
+                                <div class="card-body">
+                                    <% if(id == userProfile._id ){ %>
+                                        <a href="#" class="card-link boarderless" id="subAccount">Add Partnership<i class="fas fa-plus-circle"></i></a>
+                                        <% } %>
+                                </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-9 col-sm-12'>
+                        <div class="row">
+                            <h1><strong>Partnerships</strong></h1>
+                        </div>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Wallet Address</th>
+                                    <th scope="col">Current Work Load</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% userProfile.subAccounts.forEach(function(partner){ %>
+
+                                    <tr>
+                                        <th scope="row"><img id="notifiaction-icon" src="/images/favicon.png"></th>
+                                        <td> <a href=<%='/profile/' + partner._id %> > <%= partner.firstName %> </a> </td>
+                                        <td>
+                                            <%= partner.lastName %>
+                                        </td>
+                                        <td><button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title= <%= partner.wallet %> >
+                                              <%= partner.wallet.substring(0, 8) %>
+                                            </button></td>
+                                        <td>
+                                            <%= partner.acceptedTasks.length + " Tasks" %>
+                                        </td>
+                                    </tr>
+
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <% include partials/forms/addSubAccount %>
+
+
+            </div>
+            <script type="text/javascript" src="/javascripts/profile-behavior.js"></script>
+
+
+            <% include partials/footer %>

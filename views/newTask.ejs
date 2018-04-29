@@ -1,0 +1,52 @@
+<% include partials/header%>
+
+    <div id="all">
+        <div class="section" id="profile-body">
+
+            <div class="container ">
+                <h2 class="center">Create New Task</h2>
+
+                <form class="needs-validation center" action=<%="/task/" + id %> method=POST novalidate>
+                    <div class="form-group">
+                        <label class="float-left" for="taskTitle">Title</label>
+                        <input type="text" class="form-control " id="taskTitle" name="task[title]" placeholder="e.g Wash Dishes" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="float-left" for="taskDescription">Description</label>
+                        <textarea class="form-control  " id="taskDescription" name="task[description]" rows="3"></textarea>
+                    </div>
+                    <label class="float-left" for="payoutAmount">Payout</label>
+                    <div class="form-inline">
+                        <div class="input-group mb-2 mr-sm-2">
+                            <input type="number" step="0.01" class="form-control" id="payoutAmount" name="task[payout]" placeholder="10.00" min="1" max=<%= user.balance %> required>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">XLM</div>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="mr-sm-2 float-left" for="receiver">Receiver</label>
+                    <div class="form-group">
+                        <select class="custom-select mr-sm-2  " name="task[acceptor]" id="receiver" style="height: 2em" required>
+                            <option selected>Choose...</option>
+                                <%  userProfile.subAccounts.forEach(function(subAccount){ %>
+                            <option value= <%= subAccount._id %> > <%= subAccount.firstName + ' ' + subAccount.lastName %> </option>
+                                <% }); %>
+                      </select>
+                    </div>
+                    <div class="form-check">
+
+                        <label class="form-check-label" for="emailAlert">
+                            Alert User By Email?
+                      </label>
+                        <input class="form-check-input" type="checkbox" value="send" id="emailAlert" name="task[emailAlert]">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+        </div>
+
+        <script type="text/javascript" src="/javascripts/profile-behavior.js"></script>
+
+
+        <% include partials/footer%>

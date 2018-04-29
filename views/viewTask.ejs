@@ -1,0 +1,73 @@
+<% include partials/header %>
+
+  <div id="all">
+    <div class="section" id="profile-body">
+
+      <% if(id == viewTask.creator._id){ %>
+        <div class="container ">
+          <h2 class="center">Review Task</h2>
+
+          <form action= <%= "/task/" + id + "/" + viewTask._id + "?_method=PUT" %> method=POST class="center">
+            <div class="form-group">
+              <label class="float-left" for="taskTitle">Title</label>
+              <input type="text" class="form-control " id="taskTitle" name="task[title]" value=<%= "" + viewTask.title %> >
+            </div>
+            <div class="form-group">
+              <label class="float-left" for="taskDescription">Description</label>
+              <textarea class="form-control  " id="taskDescription" name="task[description]" rows="3"> <%= viewTask.description %></textarea>
+            </div>
+            <label class="float-left" for="payoutAmount">Payout</label>
+            <div class="form-inline">
+              <div class="input-group mb-2 mr-sm-2">
+                <h4>
+                  <%= viewTask.payout.amount %>
+                </h4>
+                <div class="input-group-prepend">
+                  <div class="input-group-text">XLM</div>
+                </div>
+              </div>
+            </div>
+            <label class="mr-sm-2 float-left" for="receiver">Receiver</label>
+            <div class="form-group">
+              <h3>
+                <%= viewTask.acceptor.firstName + " " + viewTask.acceptor.lastName %>
+              </h3>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <form action= <%= "/task/" + id + "/" + viewTask._id + "?_method=DELETE" %> method="POST" >
+            <input type="text" name="task[deletedTask]" value=<%= viewTask._id %> hidden></input>
+            <button type="submit" class="btn btn-danger">Delete</button>
+
+          </form>
+
+        </div>
+
+        <% }else{ %>
+
+
+
+          <div class="container" id="task-view">
+            <div class="card text-center">
+              <div class="card-header">
+                <span class="badge badge-success"><%= viewTask.payout.amount %> XLM</span>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= viewTask.title %>
+                </h5>
+                <p class="card-text">
+                  <%= viewTask.description %>
+                </p>
+                <a href="#" class="btn btn-primary">Edit</a>
+              </div>
+              <div class="card-footer text-muted">
+                <%= viewTask.date %>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+    <% } %>
+      <% include partials/footer %>

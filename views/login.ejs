@@ -1,0 +1,84 @@
+<% include partials/header%>
+<% include partials/forms/registerPopUp %>
+
+    <!-- Added external script for validation-->
+    <!--<script src="validateRegister.js"></script>-->
+
+    <div id="all">
+        <div class="section" id="profile-body">
+            <div class="container">
+                <% if(typeof message != 'undefined'){ %>
+                    <h3>
+                        <%= message %>
+                    </h3>
+                    <% } %>
+                        <% if(typeof lockout != 'undefined' && lockout === false){ %>
+                            <h5>User Log In</h5>
+                            <!-- Added onsubmit event, linked to external JS file-->
+                            <form class="needs-validation" action=<%="/account/login" %> method="POST" novalidate>
+
+                                <div class="form-group">
+                                    <label for="username">Email address</label>
+                                    <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username">
+                                    <div class="invalid-feedback">
+                                        Username Needed!
+                                    </div>
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="NewPassword">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                    <div class="invalid-feedback">
+                                        Enter password!
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Log In!</button>
+                            </form>
+                            <% } else{ %>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unlockModal">
+                                  Unlock Account
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal" id="unlockModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Unlock Account</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                               
+                                                     <form id="existent-user-form" onsubmit="event.preventDefault(); unlockEmailer();">
+                                                        <div class="form-group">
+                                                            <label for="existentUser">Email address</label>
+                                                            <input type="email" class="form-control" id="existentUser" name="existentUser" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                                            <div class="invalid-feedback">
+                                                                User not found!
+                                                            </div>
+                                                            <small id="emailHelp" class="form-text text-muted">Enter email of locked account.</small>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+
+                                          
+                                                   
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/javascripts/profile-behavior.js"></script>
+
+
+    <% include partials/footer %>

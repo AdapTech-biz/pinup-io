@@ -1,0 +1,36 @@
+<% include partials/header %>
+
+    <div id="all">
+        <div class="section" id="profile-body">
+
+            <div class="container" id="task-view">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <span class="badge badge-success"> <%= reviewTask.payout.amount %> XLM</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= reviewTask.title %>
+                        </h5>
+                        <p class="card-text">
+                            <%= reviewTask.description %>
+                        </p>
+                        <form action= <%= "/task/review/" + reviewTask._id + "/" + reviewTask.status.tempHash %> method="POST">
+                            <button class="btn btn-success">Accept</button>
+                        </form>
+                        <form action= <%= "/task/review/" + reviewTask._id + "/" + reviewTask.status.tempHash + "?_method=DELETE" %> method="POST">
+                            <button class="btn btn-primary">Decline</button>
+                        </form>
+
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        <%= reviewTask.date %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+<% include partials/footer %>

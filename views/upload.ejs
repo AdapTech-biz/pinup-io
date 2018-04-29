@@ -1,0 +1,32 @@
+<% include partials/header%>
+
+    <%
+//check to see if user has profile picture uploaded, if not use avatar placeholder
+
+if(userProfile.picture.data === undefined){
+var picture = "https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg";
+}else{
+var picture = "data:image/jpeg;base64,"+userProfile.picture.data;
+}
+%>
+        <div id="all">
+            <div class="section" id="profile-body">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h2 id="upload-title">Update Profile Picture</h2>
+                            <div class="card " id="upload-profile-pic-container" style="width: 30rem;">
+                                <img class="card-img-top" id="profile-image" src= <%= picture %> alt="Card image cap">
+                                <form action= <%= "/profile/" + userProfile._id + "/upload" %> method="POST" enctype="multipart/form-data">
+                                    <input type="file" name="pic" accept="image/*" />
+                                    <input type="submit" class="btn" value="Update Picture!">
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<% include partials/footer %>

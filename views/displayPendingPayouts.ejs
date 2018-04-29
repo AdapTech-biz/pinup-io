@@ -1,0 +1,79 @@
+<% include partials/header %>
+    <% //check to see if user has profile picture uploaded, if not use avatar placeholder
+
+    if(userProfile.picture.data == undefined){
+        var picture = "https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg";
+    }else{
+        var picture = "data:image/jpeg;base64,"+userProfile.picture.data;
+    }
+%>
+
+        <div id="all">
+            <div class="section" id="profile-body">
+
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12">
+
+                        <div class="border border-danger" id="user-picture">
+                            <% if(id == userProfile._id ){
+                            var formName = 'uploadPic';
+                        } else {
+                            var formName = 'ViewPic';
+                        } %>
+                                <form id=<%= formName %> action=
+                                    <%= '/profile/' +userProfile._id + '/upload' %> method="GET">
+                                        <img class="card-img-top rounded" id="profile-image" src=<%= picture %> alt="Card image cap">
+                                        <input id="submitUpload" type="submit" value="Submit" />
+                                </form>
+
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <%= userProfile.firstName + ' '+ userProfile.lastName %>
+                                    </h3>
+                                    <% if(typeof pendingPayouts != 'undefined'){ %>
+                                        <h5 class="card-title">
+                                            <a href='#' id='payout-signal'>Payouts Requiring Approval (<span id="payout-counter"> <%= pendingPayouts.length %> </span>)</a>
+                                        </h5>
+                                        <% } %>
+                                </div>
+                                <div class="card-body">
+                                    <% userProfile.subAccounts.forEach(function(subAccount){ %>
+                                        <div><a href=<%='/profile/' + subAccount._id %> > <%= subAccount.firstName + ' ' + subAccount.lastName %> </a></div>
+
+                                        <% }); %>
+                                            <% if(id == userProfile._id ){ %>
+                                                <a href="#" class="card-link boarderless" id="subAccount">Add Sub-Account <i class="fas fa-plus-circle"></i></a>
+                                                <% } %>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-12">
+                        <div class="row">
+                            <% pendingPayouts.forEach(function(payout){ %>
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="card text-center">
+                                    <div class="card-header">
+                                        <span class="badge badge-success"><%= payout.payout.amount %> XLM</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <%= payout.title %>
+                                        </h5>
+                                        <p class="card-text">
+                                            <%= payout.description %>
+                                        </p>
+                                        <a href= <%= '/task/complete/' + user._id + '/' + payout._id %> class="btn btn-success">Payout!</a>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <%= payout.date %>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div <% include partials/footer%>

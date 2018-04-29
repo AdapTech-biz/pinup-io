@@ -1,0 +1,85 @@
+<!-- Added external script for validation-->
+<!--<script src="validateNewSubUser.js"></script>-->
+    
+    <!--form to add new sub-accounts -- hidden by default-->
+    <div class="modal subAccount-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Sub-Account</h5>
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                        <div >
+                            <label for="newOROld">Does the user already have a PinUP account?</label>
+                            <input type="radio" name="newOROld" id="newOROld-yes" value="1" />Yes
+                            <input type="radio" name="newOROld" id="newOROld-no" value="0" />No <br>
+                        </div>
+                        
+                            <div id="existent-user">
+                                <form id="existent-user-form" onsubmit="event.preventDefault(); lookupUser();" >
+                            <div class="form-group">
+                                <label for="existentUser">Email address</label>
+                                <input type="email" class="form-control" id="existentUser" name="existentUser" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                <div class="invalid-feedback">
+                            User not found!
+                        </div>
+                                <small id="emailHelp" class="form-text text-muted">Email address of PinUp user.</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                            
+                        </div>
+                        
+                        
+                            <div id="new-user">
+                                <form id="new-user-form" action= <%= "/profile/" + user._id + "/subaccounts/minor" %> method="POST" >
+                            
+                                <div><label for="user-DOB">Is user older than 13?</label></div>
+                                <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="ageCheck"  value="yes">
+                                      <label class="form-check-label" for="13plus">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="ageCheck" value="no">
+                                      <label class="form-check-label" for="12under">No</label>
+                                    </div>
+                            
+                            <div id="new-user-secondary-12under">
+                                <div class="form-group">
+                                    <label for="fName">First Name</label>
+                                    <input type="text" class="form-control" id="fName" name="childAccount[firstName]" placeholder="Enter First Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lName">Last Name</label>
+                                    <input type="text" class="form-control" id="lName" name="childAccount[lastName]" placeholder="Enter Last Name">
+                                </div>
+
+                            
+                                <div class="modal-footer" id="subaccount-modal-footer">
+                                    <button type="submit" class="btn btn-primary" id="submit">Add!</button>
+                                    <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                            </form>
+                                                            <!--<form id="new-user-invite" onsubmit="validate(); event.preventDefault(); inviteUser();" >-->
+                            <div id="new-user-secondary-13plus">
+                                <label for="inviteEmail">Email address</label>
+                                <input type="email" class="form-control" id="inviteEmail" name="inviteEmail" aria-describedby="emailHelp" placeholder="Invite user..." required>
+                                <small id="inviteEmailHelp" class="form-text text-muted">Enter email to send invite!</small>
+                                <button type="button" onclick="event.preventDefault(); inviteUser();"class="btn btn-primary">Submit</button>
+                            </div>
+                            <!--</form>-->
+                            
+                        </div>
+                        
+                        
+
+                   
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    

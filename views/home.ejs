@@ -1,0 +1,148 @@
+<% include partials/header %>
+
+<% include partials/forms/registerPopUp %>
+
+<% include partials/forms/loginPopUp %>
+
+<% if(typeof message != 'undefined' && message != null){ %>
+<div class='container'>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <%= message %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+</div>
+
+<% } %>
+
+<div id="all">
+ <% if(typeof message != 'undefined'){ %>
+                <div class="alert alert-warning" role="alert">
+                      <%= message %>
+                </div>
+                <% } %>
+
+        <!-- *** INTRO IMAGE ***
+_________________________________________________________ -->
+        <div id="intro" >
+            <div class="item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12" >
+                            <div  class="logo">
+                                <img src="images/My-Image.png" alt="logo" width="130">
+                            </div>
+                            <h1 >PinUp</h1>
+                            <h2 >Building motivation one task at a time</h2>
+                            <hr  class="intro-divider"></hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- *** SECTION END *** -->
+
+
+        <!-- *** CHORES SIMPLIFIED ***
+_________________________________________________________ -->
+        <div class="section" id= "chores">
+            <div class="container">
+                <div class="row">
+                  <div class="col-sm-12">
+                      <h2 class="title" >Chores Simplified</h2>
+                  </div>
+                </div>
+            </div>
+
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-4 col-sm-12" class="column" style="background-color:#aaa;">
+                  <h2>Motivate the Little Ones</h2>
+                  <img src="images/1.jpg" alt="..." class="img-thumbnail img-thumbnail-250">
+                  <p><br>Get help with what you need, when you need it!</p>
+                 
+                  <br></br>
+                </div>
+                <div class="col-lg-4 col-sm-12" class="column" style="background-color:#bbb;">
+                  <h2>Hands Up For More Family Time</h2>
+                  <img src="images/2.jpg" alt="..." class="img-thumbnail img-thumbnail-250">
+                  <p class="card-text"><br>Trash already taken out <i class="fas fa-check"></i></p>
+                  <p class="card-text">Dishes washed <i class="fas fa-check"></i></p>
+                  <p class="card-text">Homework done <i class="fas fa-check"></i></p>
+                  
+                  <br></br>
+                </div>
+                <div class="col-lg-4 col-sm-12" class="column" style="background-color:#ccc;">
+                  <h2>Foster Confidence</h2>
+                  <img src="images/3.gif" alt="..." class="img-thumbnail img-thumbnail-250">
+                  <p><br>Watch as cofidence levels raise with the successful completion of each chore.</p>
+                  
+                  <br></br>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- /#chores -->
+
+        <!-- *** SECTION END *** -->
+
+
+
+        <!-- *** BLOCKCHAIN MADE FOR THE FAMILY ***
+_________________________________________________________ -->
+        <div class="section text-gradient">
+            <div class="container">
+                <div class="col-md-12">
+                    <h2 class="title" >Blockchain Made for the Family</h2>
+                </div>
+                
+                <div class="col-md-12">
+                  <a href = "https://www.stellar.org/" target="_blank"> <img src="images/stellar-lumens.png" width = "450px" > </a>
+                </div>
+                <!-- /.12 -->
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /.section -->
+
+        <!-- *** SECTION END *** -->
+
+
+
+        <!-- *** REAL TIME TRANSACTIONS ***
+_________________________________________________________ -->
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                      <h2 class="title" >Real-Time Transactions</h2>
+
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="card-text">Hard work deserves a reward. Pay in hugs, kisses, or love but <span class="lumens"><strong>Lumens</strong></span> are accpeted by all.</p>
+                            <p class="card-text"><span class="lumens"><strong>Stellar</strong></span> transactions has changed the look of that ol' piggy bank on the dresser.</p>
+                            <p class="card-text">Let the little ones earn to save for a treat or get a headstart on that college fund!</p>
+                            <img src="https://www.iconexperience.com/_img/g_collection_png/standard/512x512/piggy_bank.png" alt="..." class="img-thumbnail" id="piggy">
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container -->
+
+        </div>
+        <!-- /.section -->
+
+    
+
+    <script type="text/javascript" src="/javascripts/profile-behavior.js"></script>
+
+
+<% include partials/footer %>

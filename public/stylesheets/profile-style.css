@@ -1,0 +1,213 @@
+
+#profile-body{
+    height: 100%;
+    font-size: 1.5em;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+#profile-body:before{
+    margin-top: 5%;
+}
+
+#profile-body:after{
+    padding-bottom: 2%;
+    margin-bottom: 15%;
+}
+
+#submitUpload{
+    visibility: hidden;
+}
+#upload-title{
+    text-align: center;
+}
+
+#user-picture{
+    width: 75%;
+}
+
+#profile-image:hover{
+    position: relative;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+    padding: 10px;
+    background: white;
+}
+#upload-profile-pic-container{
+    margin: 0 auto;
+}
+
+.module {
+ background: #2C3E50;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #FD746C, #2C3E50);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #FD746C, #2C3E50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+height: 2em;
+padding: 15%;
+ 
+}
+
+.stripe-2 {
+  color: black;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #ccc 10px,
+    #ccc 20px
+  ),
+  linear-gradient(
+    to bottom,
+    #eee,
+    #999
+  )
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.job-pane {
+    background-color: #b73e48;
+    /*margin: 0 auto;*/
+    padding: 25px;
+    height: 
+    /*width: 55%;*/
+}
+
+
+.new-task-plus {
+    font-size: 2em;
+    color: #ce0cf9;
+    margin-top: 10%;
+
+}
+
+.fa-thumbtack{
+    margin-top: 10%;
+}
+
+
+#existent-user, #new-user, #new-user-secondary-12under, #subaccount-modal-footer, #new-user-secondary-13plus{
+    display: none
+}
+
+
+.boarderless {
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.new-task-body{
+    /*padding: 1em;*/
+    height: 90%;
+}
+
+.task-actions{
+    display:  none;
+    position: absolute;
+    /*left:20%;*/
+    top: 30%;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.task-cards{
+    margin-bottom: 2em;
+}
+
+
+.task-cards:hover{
+    opacity:0.6;
+background-color: Gray;
+}
+
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+     -moz-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+}
+
+#task-view{
+    margin-top: 5%;
+}
+
+.float-left{
+    float: left;
+}
+
+.modal-backdrop{
+    z-index: -9999;
+}
+
+.flip {
+  transform: rotate(-180deg);
+}
+
+.new-notification{
+        border: 1px solid;
+    padding: 10px;
+    box-shadow: 5px 10px red;
+}
+
+#payout-signal{
+    text-decoration: none;
+    
+    color: blue;
+    
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+    
+}
+
+#message p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+}
+
+.valid:before {
+    position: relative;
+    left: -35px;
+    content:'\2713';
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+    color: red;
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: '\274c';
+}

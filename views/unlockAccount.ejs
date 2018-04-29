@@ -1,0 +1,36 @@
+<% include partials/header%>
+
+<!-- Added external script for validation-->
+<!--<script src="validateRegister.js"></script>-->
+
+<div id="all">
+    <div class="section" id="profile-body">
+            <div class="container">
+                <% if(typeof message != 'undefined'){ %>
+                    <h3> <%= message %> </h3>
+                    <form action=<%="/account/login/" %> method="POST" >
+                        <button type="submit">Resend Email</button>
+                    </form>
+                    <% } %>
+                    
+                <h5>Account Unlocker</h5>
+            <!-- Added onsubmit event, linked to external JS file-->
+                <form class="needs-validation" action=<%="/account/"+ user._id +"/emailUnlocker" %> method="POST" novalidate>
+ 
+                    <div class="form-group">
+                        <label for="NewPassword">Temporary Password</label>
+                        <input type="password" class="form-control" id="tempPass" name="tempPass"  required>
+                        <div class="invalid-feedback">
+                            Enter the temporary password provided in email!
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Enter!</button>
+                </form>
+               
+            </div>
+        </div>
+   </div>
+          
+
+<% include partials/footer %>

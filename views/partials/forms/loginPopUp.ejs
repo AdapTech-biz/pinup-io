@@ -1,0 +1,74 @@
+<!-- Added external script for validation-->
+<!--<script src="validateLogin.js"></script>-->
+
+<!--form to add new sub-accounts -- hidden by default-->
+<div class="modal login-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Log In</h5>
+                <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                
+                <!-- Added onsubmit event, linked to external JS file-->
+                    <form class="needs-validation" action="/account/login" method="POST" novalidate>
+
+                        <div class="form-group">
+                            <label for="Email">Email address</label>
+                            <input type="email" class="form-control" id="Email" name="username" aria-describedby="emailHelp" placeholder="Enter email" required>
+                            <div class="invalid-feedback">
+                                Enter email!
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input type="password" class="form-control" id="Password" name="password" placeholder="Password" required>
+                            <div class="invalid-feedback">
+                                Enter password!
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">New around here? Sign up</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#forgotPassword-modal">Forgot password?</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+                                <!-- Modal -->
+                                <div class="modal" id="forgotPassword-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Recover Password</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                               
+                                                     <form id="existent-user-form" onsubmit="event.preventDefault(); passwordRecover();">
+                                                        <div class="form-group">
+                                                            <label for="existentUser">Email address</label>
+                                                            <input type="email" class="form-control" id="existentUser" name="existentUser" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                                            <div class="invalid-feedback">
+                                                                User not found!
+                                                            </div>
+                                                            <small id="emailHelp" class="form-text text-muted">Enter username to recover password.</small>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </form>
+
+                                          
+                                                   
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
