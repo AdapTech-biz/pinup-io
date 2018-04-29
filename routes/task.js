@@ -73,7 +73,7 @@ router.post('/:id', checkSignIn, updateBalance, function(req, res) {
             if (req.body.task.emailAlert == 'send') {
 
                 // Set the region 
-                AWS.config.update({ region: process.env.AWS_REGION });
+                AWS.config.update({ region: ""+process.env.AWS_REGION });
 
                 // Create sendEmail params 
                 var params = {
@@ -295,7 +295,7 @@ router.put("/complete/:userID/:taskID", checkSignIn, setCookie, pendingTasks, fu
             
 
             // Set the region 
-            AWS.config.update({ region: process.env.AWS_REGION });
+            AWS.config.update({ region: ""+process.env.AWS_REGION });
 
             // Create sendEmail params 
             var params = {

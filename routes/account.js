@@ -180,7 +180,7 @@ router.post('/:id/recover', function(req, res) {
             
 
             // Set the region 
-            AWS.config.update({ region: process.env.AWS_REGION });
+            AWS.config.update({ region: ""+process.env.AWS_REGION });
 
             // Create sendEmail params 
             var params = {
@@ -254,7 +254,7 @@ router.post('/:id/helpUnlock', function(req, res) {
             user.failedLogIns.isLocked=true;
             user.save();
             // Set the region 
-            AWS.config.update({ region: process.env.AWS_REGION });
+            AWS.config.update({ region: ""+process.env.AWS_REGION });
 
             // Create sendEmail params 
             var params = {
@@ -414,7 +414,7 @@ router.post('/signup', function(req, res) {
                     /************Email notification--Account Activation Email*************/
 
                     // Set the region 
-                    AWS.config.update({ region: process.env.AWS_REGION });
+                    AWS.config.update({ region: ""+process.env.AWS_REGION });
 
                     // Create sendEmail params 
                     var params = {
@@ -514,7 +514,7 @@ router.post("/invite", function(req, res) {
             console.log(err);
 
         // Set the region 
-        AWS.config.update({ region: process.env.AWS_REGION });
+        AWS.config.update({ region: ""+process.env.AWS_REGION });
 
         // Create sendEmail params 
         var params = {
@@ -646,7 +646,7 @@ router.post("/register/:sponsorID", function(req, res) {
 
 
                     // Set the region 
-                    AWS.config.update({ region: process.env.AWS_REGION });
+                    AWS.config.update({ region: ""+process.env.AWS_REGION });
 
                     // Create sendEmail params 
                     var params = {
