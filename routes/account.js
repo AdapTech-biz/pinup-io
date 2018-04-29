@@ -188,7 +188,7 @@ router.post('/:id/recover', function(req, res) {
             
 
             // Set the region 
-            AWS.config.update({ region: ""+process.env.AWS_REGION });
+            AWS.config.update({ region: 'us-east-1' });
 
             // Create sendEmail params 
             var params = {
@@ -211,10 +211,10 @@ router.post('/:id/recover', function(req, res) {
                         Data: 'PinUp Account Reset'
                     }
                 },
-                Source: ""+process.env.EMAIL_CLIENT,
+                Source: 'customer-support@pinup.awsapps.com',
                 /* required */
                 ReplyToAddresses: [
-                    ""+process.env.EMAIL_CLIENT
+                    'customer-support@pinup.awsapps.com'
                     /* more items */
                 ],
             };
@@ -262,7 +262,7 @@ router.post('/:id/helpUnlock', function(req, res) {
             user.failedLogIns.isLocked=true;
             user.save();
             // Set the region 
-            AWS.config.update({ region: ""+process.env.AWS_REGION });
+            AWS.config.update({ region: 'us-east-1' });
 
             // Create sendEmail params 
             var params = {
@@ -286,10 +286,10 @@ router.post('/:id/helpUnlock', function(req, res) {
                         Data: 'PinUp Account Unlock'
                     }
                 },
-                Source: ""+process.env.EMAIL_CLIENT,
+                Source: 'customer-support@pinup.awsapps.com',
                 /* required */
                 ReplyToAddresses: [
-                    ""+process.env.EMAIL_CLIENT
+                    'customer-support@pinup.awsapps.com'
                     /* more items */
                 ],
             };
@@ -436,7 +436,7 @@ router.post('/signup', function(req, res) {
                     /************Email notification--Account Activation Email*************/
 
                     // Set the region 
-                    AWS.config.update({ region: ""+process.env.AWS_REGION });
+                    AWS.config.update({ region: 'us-east-1' });
 
                     // Create sendEmail params 
                     var params = {
@@ -459,10 +459,10 @@ router.post('/signup', function(req, res) {
                                 Data: 'PinUp Account Activation'
                             }
                         },
-                        Source: ""+process.env.EMAIL_CLIENT,
+                        Source: 'customer-support@pinup.awsapps.com',
                         /* required */
                         ReplyToAddresses: [
-                            ""+process.env.EMAIL_CLIENT
+                            'customer-support@pinup.awsapps.com'
                             /* more items */
                         ],
                     };
@@ -536,7 +536,7 @@ router.post("/invite", function(req, res) {
             console.log(err);
 
         // Set the region 
-        AWS.config.update({ region: ""+process.env.AWS_REGION });
+        AWS.config.update({ region: 'us-east-1'});
 
         // Create sendEmail params 
         var params = {
@@ -560,10 +560,10 @@ router.post("/invite", function(req, res) {
                     Data: 'PinUp Account Invite'
                 }
             },
-            Source: ""+process.env.EMAIL_CLIENT,
+            Source: 'customer-support@pinup.awsapps.com',
             /* required */
             ReplyToAddresses: [
-                ""+process.env.EMAIL_CLIENT
+                'customer-support@pinup.awsapps.com'
                 /* more items */
             ],
         };
@@ -672,7 +672,7 @@ router.post("/register/:sponsorID", function(req, res) {
 
 
                     // Set the region 
-                    AWS.config.update({ region: ""+process.env.AWS_REGION });
+                    AWS.config.update({ region: 'us-east-1' });
 
                     // Create sendEmail params 
                     var params = {
@@ -695,10 +695,10 @@ router.post("/register/:sponsorID", function(req, res) {
                                 Data: 'PinUp Account Activation'
                             }
                         },
-                        Source: ""+process.env.EMAIL_CLIENT,
+                        Source: 'customer-support@pinup.awsapps.com',
                         /* required */
                         ReplyToAddresses: [
-                            ""+process.env.EMAIL_CLIENT
+                            'customer-support@pinup.awsapps.com'
                             /* more items */
                         ],
                     };

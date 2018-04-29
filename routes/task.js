@@ -77,7 +77,7 @@ router.post('/:id', checkSignIn, updateBalance, function(req, res) {
             if (req.body.task.emailAlert == 'send') {
 
                 // Set the region 
-                AWS.config.update({ region: ""+process.env.AWS_REGION });
+                AWS.config.update({ region: 'us-east-1' });
 
                 // Create sendEmail params 
                 var params = {
@@ -100,10 +100,10 @@ router.post('/:id', checkSignIn, updateBalance, function(req, res) {
                             Data: 'PinUp Task Review'
                         }
                     },
-                    Source: ""+process.env.EMAIL_CLIENT,
+                    Source: 'customer-support@pinup.awsapps.com',
                     /* required */
                     ReplyToAddresses: [
-                        ""+process.env.EMAIL_CLIENT
+                        'customer-support@pinup.awsapps.com'
                         /* more items */
                     ],
                 };
@@ -315,7 +315,7 @@ router.put("/complete/:userID/:taskID", checkSignIn, setCookie, pendingTasks, fu
             
 
             // Set the region 
-            AWS.config.update({ region: ""+process.env.AWS_REGION });
+            AWS.config.update({ region: 'us-east-1' });
 
             // Create sendEmail params 
             var params = {
@@ -340,10 +340,10 @@ router.put("/complete/:userID/:taskID", checkSignIn, setCookie, pendingTasks, fu
                         Data: 'PinUp Task Payout Approval'
                     }
                 },
-                Source: ""+process.env.EMAIL_CLIENT,
+                Source: 'customer-support@pinup.awsapps.com',
                 /* required */
                 ReplyToAddresses: [
-                    ""+process.env.EMAIL_CLIENT
+                    'customer-support@pinup.awsapps.com'
                     /* more items */
                 ],
             };
