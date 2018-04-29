@@ -37,9 +37,21 @@ app.use(logger('dev'));
 
 
 app.use('/', indexRouter);
+try{
 app.use('/profile', profileRouter);
+}catch(e){
+console.log(e);
+}
+try{
 app.use('/account', accountRouter);
+}catch(e){
+ console.log(e); 
+}
+try{
 app.use('/task', taskRouter);
+}catch(e){
+ console.log(e); 
+}
 app.disable('x-powered-by');
 
 app.use(logErrors);
