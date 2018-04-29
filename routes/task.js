@@ -138,12 +138,13 @@ router.get("/review/:id/:key", checkSignIn, updateBalance, pendingTasks, functio
     Task.findById(id).populate({ path: 'creator' }).populate({ path: 'acceptor' }).exec(function(err, taskFound) {
         if (err)
             console.log(err);
-
+    if (taskFound.status.active == false){
     try{
         res.render("reviewTask", { reviewTask: taskFound, page: req.active, pendingTasks: res.locals.pendingTasks });
     }catch (e) {
         return res.redirect('/');
     }
+    }else return res.redirect('/');
     });
 });
 
