@@ -37,10 +37,7 @@
                                         <% } %>
                                 </div>
                                 <div class="card-body">
-                                    <% userProfile.subAccounts.forEach(function(subAccount){ %>
-                                        <div><a href=<%='/profile/' + subAccount._id %> > <%= subAccount.firstName + ' ' + subAccount.lastName %> </a></div>
-
-                                        <% }); %>
+                                   <p><a href= <%= "/profile/" + userProfile._id + "/list/partners" %> ><small>View All Partnerships</small></a></p>
                                             <% if(id == userProfile._id ){ %>
                                                 <a href="#" class="card-link boarderless" id="subAccount">Add Sub-Account <i class="fas fa-plus-circle"></i></a>
                                                 <% } %>
