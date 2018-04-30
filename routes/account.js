@@ -726,6 +726,7 @@ router.post("/register/:sponsorID", function(req, res) {
             }
         });
     });
+    req.session.messages = {message: "Activation Email Sent!"};
     res.redirect("/");
 });
 
