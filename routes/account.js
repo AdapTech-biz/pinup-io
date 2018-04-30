@@ -654,6 +654,7 @@ router.post("/register/:sponsorID", function(req, res) {
                     DOB: DOB,
                     email: email,
                     wallet: publicKey, //wallet address used for transactions and balance updates
+                    balance: 0,
                     privateKey: secret,
                     status: { active: false, tempHash: hash }
                 }, function(err, profile) {
